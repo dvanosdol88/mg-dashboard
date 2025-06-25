@@ -23,16 +23,25 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'out'))); // Serve Next.js static export
+app.use(express.static(path.join(__dirname, '.next/static')));
 
 // API Routes
 app.use('/api/tasks', tasksRouter);
 app.use('/api/gemini', geminiRouter);
 app.use('/api/health', healthRouter);
 
-// Catch-all handler for Next.js routes (serve index.html for client-side routing)
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'out', 'index.html'));
+// Simple API-only server - frontend will be served separately
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'mg-dashboard API server',
+    version: '2.0.0',
+    endpoints: [
+      'GET /api/health',
+      'GET /api/tasks',
+      'POST /api/tasks',
+      'POST /api/gemini'
+    ]
+  });
 });
 
 // Error handling middleware
