@@ -1,16 +1,27 @@
-import { db } from "@/lib/firebase";
-import { collection, addDoc, getDocs } from "firebase/firestore";
+// This file is deprecated - API routes have been moved to Express.js server
+// Please use the Express.js endpoints instead:
+// GET /api/tasks - Get all tasks
+// POST /api/tasks - Create new task
 
 export async function GET() {
-  const querySnapshot = await getDocs(collection(db, "tasks"));
-  const tasks = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-  return new Response(JSON.stringify(tasks), { status: 200 });
+  return new Response(JSON.stringify({ 
+    message: "This endpoint is deprecated. Please use the Express.js server endpoints.",
+    endpoints: {
+      tasks: "/api/tasks",
+      gemini: "/api/gemini",
+      health: "/api/health"
+    }
+  }), { 
+    status: 410, // Gone - endpoint no longer available
+    headers: { 'Content-Type': 'application/json' }
+  });
 }
 
 export async function POST() {
-  const docRef = await addDoc(collection(db, "tasks"), {
-    title: "My First Task",
-    completed: false,
+  return new Response(JSON.stringify({ 
+    message: "This endpoint is deprecated. Please use POST /api/tasks on the Express.js server."
+  }), { 
+    status: 410,
+    headers: { 'Content-Type': 'application/json' }
   });
-  return new Response(JSON.stringify({ message: "Task added!", id: docRef.id }), { status: 200 });
 }

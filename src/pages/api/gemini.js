@@ -1,26 +1,10 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// This file is deprecated - Gemini API has been moved to Express.js server
+// Please use the Express.js endpoint instead: POST /api/gemini
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Only POST requests allowed" });
-  }
-
-  const { prompt } = req.body;
-
-  if (!prompt) {
-    return res.status(400).json({ error: "Prompt is required" });
-  }
-
-  try {
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-
-    const result = await model.generateContent(prompt);
-    const responseText = result.response.text();
-
-    return res.status(200).json({ response: responseText });
-  } catch (error) {
-    console.error("Gemini API Error:", error);
-    return res.status(500).json({ error: "Failed to fetch response from Gemini AI" });
-  }
+  return res.status(410).json({ 
+    message: "This endpoint is deprecated. Please use the Express.js server.",
+    endpoint: "/api/gemini",
+    method: "POST"
+  });
 }

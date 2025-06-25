@@ -1,44 +1,164 @@
-<<<<<<< HEAD
-# mg-dashboard
-=======
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# MG Dashboard
 
-## Getting Started
+A Next.js dashboard application with PostgreSQL backend, deployed on Render.
 
-First, run the development server:
+## Features
 
+- 📊 Task management dashboard
+- 🤖 Google Gemini AI integration
+- 🗄️ PostgreSQL database
+- 🚀 Deployed on Render
+- ⚡ Express.js API backend
+
+## Tech Stack
+
+- **Frontend**: Next.js 15, React 19, TailwindCSS
+- **Backend**: Express.js API routes
+- **Database**: PostgreSQL
+- **AI**: Google Gemini API
+- **Deployment**: Render
+
+## Development Setup
+
+### Prerequisites
+
+- Node.js 18+ (LTS recommended)
+- PostgreSQL (local development)
+- Google Gemini API key
+
+### Local Development
+
+1. **Clone and install dependencies**:
+   ```bash
+   git clone <your-repo-url>
+   cd mg-dashboard
+   npm install
+   ```
+
+2. **Set up environment variables**:
+   ```bash
+   cp .env.example .env
+   ```
+   Edit `.env` with your actual values:
+   - `DATABASE_URL`: PostgreSQL connection string
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+
+3. **Set up the database**:
+   ```bash
+   # Create database and run migrations
+   npm run db:migrate
+   ```
+
+4. **Development commands**:
+   ```bash
+   # Run Next.js development server (frontend only)
+   npm run dev:next
+
+   # Run Express server (API backend)
+   npm run dev:server
+
+   # Build for production
+   npm run build
+
+   # Start production server
+   npm start
+   ```
+
+## API Endpoints
+
+### Tasks
+- `GET /api/tasks` - Get all tasks
+- `GET /api/tasks/:id` - Get task by ID
+- `POST /api/tasks` - Create new task
+- `PUT /api/tasks/:id` - Update task
+- `DELETE /api/tasks/:id` - Delete task
+- `PATCH /api/tasks/:id/toggle` - Toggle task completion
+
+### Gemini AI
+- `POST /api/gemini` - Generate AI response
+- `GET /api/gemini/models` - List available models
+
+### Health Check
+- `GET /api/health` - System health status
+- `GET /api/health/database` - Database health check
+
+## Database Schema
+
+The PostgreSQL database includes:
+- `tasks` table: Task management
+- `users` table: User management (future use)
+- Automatic timestamps and UUID primary keys
+
+## Deployment on Render
+
+### Automatic Deployment
+
+1. **Connect GitHub repository** to Render
+2. **Use render.yaml** for automatic configuration
+3. **Set environment variables**:
+   - `GEMINI_API_KEY`: Your Google Gemini API key
+   - `DATABASE_URL`: Automatically provided by Render PostgreSQL
+
+### Manual Setup
+
+1. **Create PostgreSQL database** on Render
+2. **Create web service** with:
+   - Build Command: `npm install && npm run build`
+   - Start Command: `npm start`
+   - Health Check Path: `/api/health`
+3. **Set environment variables** in Render dashboard
+
+### Database Migration
+
+Run the database schema on first deployment:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run db:migrate
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Migration from Firebase
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+This project was migrated from Firebase to PostgreSQL + Render:
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+✅ **Completed**:
+- Firestore → PostgreSQL
+- Firebase Functions → Express.js APIs
+- Firebase Hosting → Render deployment
+- Kept Google Gemini AI integration
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+🗑️ **Removed**:
+- Firebase SDK
+- Firestore client code
+- Firebase configuration files
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `DATABASE_URL` | PostgreSQL connection string | Yes |
+| `GEMINI_API_KEY` | Google Gemini API key | Yes |
+| `NODE_ENV` | Environment (development/production) | No |
+| `PORT` | Server port (default: 3000) | No |
 
-To learn more about Next.js, take a look at the following resources:
+## Troubleshooting
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+### Database Issues
+- Check `DATABASE_URL` format: `postgresql://user:password@host:port/database`
+- Verify database migrations: `npm run db:migrate`
+- Test connection: `GET /api/health/database`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### API Issues
+- Verify `GEMINI_API_KEY` is set correctly
+- Check API quotas and limits
+- Monitor logs in Render dashboard
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
->>>>>>> a8fb160 (Initial commit - Added Firebase GitHub Actions workflow)
+## License
+
+This project is private and proprietary.
