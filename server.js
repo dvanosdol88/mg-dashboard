@@ -18,7 +18,14 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
+
+// Debug PORT assignment
+console.log('DEBUG: process.env.PORT =', process.env.PORT);
+console.log('DEBUG: typeof process.env.PORT =', typeof process.env.PORT);
+console.log('DEBUG: All env vars:', Object.keys(process.env).filter(key => key.includes('PORT')));
+
 const PORT = process.env.PORT || 3000;
+console.log('DEBUG: Final PORT value =', PORT);
 
 // Middleware
 app.use(cors());
