@@ -68,9 +68,13 @@ app.listen(PORT, '0.0.0.0', async () => {
   
   // Test database connection on startup
   try {
-    const { testConnection } = await import('./lib/database.js');
-    await testConnection();
-    console.log('✅ Database connection successful');
+    const { healthCheck } = await import('./lib/database.js');
+    const health = await healthCheck();
+    if (health.status === 'healthy') {
+      console.log('✅ Database connection successful');
+    } else {
+      console.error('❌ Database health check failed:', health.error);
+    }
   } catch (error) {
     console.error('❌ Database connection failed:', error.message);
   }

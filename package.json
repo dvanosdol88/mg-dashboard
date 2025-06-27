@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "node server.js",
-    "dev:server": "node --watch server.js",
+    "start": "node dashboard-api.js",
+    "dev:server": "node --watch dashboard-api.js",
     "dev:next": "next dev",
     "lint": "next lint",
     "export": "next build && next export",
