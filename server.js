@@ -10,6 +10,7 @@ import tasksRouter from './api/tasks.js';
 import geminiRouter from './api/gemini.js';
 import healthRouter from './api/health.js';
 import googleRoutes from './routes/google.js'; // <-- ADDED
+import deploymentInfoRouter from './api/deployment-info.js';
 
 // ES module setup
 const __filename = fileURLToPath(import.meta.url);
@@ -38,6 +39,7 @@ app.use('/api', googleRoutes); // <-- ADDED
 app.use('/api/tasks', tasksRouter);
 app.use('/api/gemini', geminiRouter);
 app.use('/api/health', healthRouter);
+app.use('/api/deployment-info', deploymentInfoRouter);
 
 // Simple API-only server - frontend will be served separately
 app.get('/', (req, res) => {
@@ -48,7 +50,8 @@ app.get('/', (req, res) => {
       'GET /api/health',
       'GET /api/tasks',
       'POST /api/tasks',
-      'POST /api/gemini'
+      'POST /api/gemini',
+      'GET /api/deployment-info'
     ]
   });
 });
