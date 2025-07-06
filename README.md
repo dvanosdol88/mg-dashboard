@@ -1,6 +1,13 @@
-# MG Dashboard
+# MG Dashboard (Experimental - Not Live)
 
-A Next.js dashboard application with PostgreSQL backend, deployed on Render.
+⚠️ **This is an experimental project and is NOT the live dashboard**
+
+The actual live personal dashboard is:
+- **Frontend**: [Dashboard_May10](https://github.com/dvanosdol88/Dashboard_May10) 
+- **Backend**: [calendar-backend](https://github.com/dvanosdol88/calendar-backend)
+- **Live URL**: https://dashboard.davidcfacfp.com
+
+This mg-dashboard project is a Next.js exploration with advanced features.
 
 ## Features
 
